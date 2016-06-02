@@ -14,7 +14,7 @@ import (
 	"strings"
 )
 
-func executable() (string, error) {
+func executable(followSym bool) (string, error) {
 	switch runtime.GOOS {
 	case "linux":
 		const deletedTag = " (deleted)"

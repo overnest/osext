@@ -3,14 +3,20 @@
 // license that can be found in the LICENSE file.
 
 // Extensions to the standard "os" package.
-package osext // import "github.com/kardianos/osext"
+package osext
 
 import "path/filepath"
 
 var cx, ce = executableClean()
+var csx, cse = executableSymClean()
 
 func executableClean() (string, error) {
-	p, err := executable()
+	p, err := executable(true)
+	return filepath.Clean(p), err
+}
+
+func executableSymClean() (string, error) {
+	p, err := executable(false)
 	return filepath.Clean(p), err
 }
 
@@ -19,6 +25,10 @@ func executableClean() (string, error) {
 // It may not be valid after the current program exits.
 func Executable() (string, error) {
 	return cx, ce
+}
+
+func ExecutableSym() (string, error) {
+	return csx, cse
 }
 
 // Returns same path as Executable, returns just the folder

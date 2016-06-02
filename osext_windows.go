@@ -16,7 +16,7 @@ var (
 )
 
 // GetModuleFileName() with hModule = NULL
-func executable() (exePath string, err error) {
+func executable(followSym bool) (exePath string, err error) {
 	return getModuleFileName()
 }
 

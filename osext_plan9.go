@@ -10,7 +10,7 @@ import (
 	"syscall"
 )
 
-func executable() (string, error) {
+func executable(followSym bool) (string, error) {
 	f, err := os.Open("/proc/" + strconv.Itoa(os.Getpid()) + "/text")
 	if err != nil {
 		return "", err

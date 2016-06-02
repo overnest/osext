@@ -17,7 +17,7 @@ import (
 
 var initCwd, initCwdErr = os.Getwd()
 
-func executable() (string, error) {
+func executable(followSym bool) (string, error) {
 	var mib [4]int32
 	switch runtime.GOOS {
 	case "freebsd":
@@ -107,7 +107,7 @@ func executable() (string, error) {
 	}
 	// For darwin KERN_PROCARGS may return the path to a symlink rather than the
 	// actual executable.
-	if runtime.GOOS == "darwin" {
+	if runtime.GOOS == "darwin" && followSym {
 		if execPath, err = filepath.EvalSymlinks(execPath); err != nil {
 			return execPath, err
 		}
